@@ -11,14 +11,25 @@
   </welcome-file-list>
   
   <servlet>
-  <description>Says hello</description> <!-- optional tag -->
-  <display-name>ProjectOneWebApp</display-name> <!-- optional tag -->
-  <servlet-name>ProjectOneWebApp</servlet-name>
-  <servlet-class>com.revature.controllers.ServletController</servlet-class>
+	  <description>Says hello</description> <!-- optional tag -->
+	  <display-name>ProjectOneWebApp</display-name> <!-- optional tag -->
+	  <servlet-name>ProjectOneWebApp</servlet-name>
+	  <servlet-class>com.revature.controllers.AddressController</servlet-class>
   </servlet>
+  
+  <servlet>
+  	<servlet-name>ForRedirController</servlet-name>
+  	<servlet-class>com.revature.controllers.ForRedirController</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
-  <servlet-name>ProjectOneWebApp</servlet-name>
-  <url-pattern>/hello</url-pattern>
+  	<servlet-name>ForRedirController</servlet-name>
+  	<url-pattern>/fr</url-pattern>
   </servlet-mapping>
+  
+  <servlet-mapping>
+	  <servlet-name>ProjectOneWebApp</servlet-name>
+	  <url-pattern>/hello</url-pattern>
+	  </servlet-mapping>
 </web-app>
 

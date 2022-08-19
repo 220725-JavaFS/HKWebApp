@@ -118,10 +118,10 @@ public class AddressDaoImpl implements AddressDAO {
 		return null;	
 	}
 
-	@Override
-	public void deleteAddress(int id) {
+	
+	public void deleteAddress(Address address) {
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "DELETE FROM address WHERE address_id = " + id + ";";
+			String sql = "DELETE FROM address WHERE address_id = " + address.getAddressId() + ";";
 			PreparedStatement statement = conn.prepareStatement(sql);				
 			statement.execute();
 			

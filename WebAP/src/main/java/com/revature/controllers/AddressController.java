@@ -52,9 +52,32 @@ public class AddressController extends HttpServlet{
 		String json = new String(sb);
 		System.out.println(json);
 		Address address = objectMapper.readValue(json,  Address.class);
+		
+		//CALL ORM HERE
 		addressService.recruitAddress(address);;
 		
 		response.setStatus(201);
+		
+		
+	}
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		StringBuilder sb = new StringBuilder();
+		BufferedReader reader = request.getReader();
+		String line = reader.readLine();
+		
+		while(line!=null) {
+			sb.append(line);
+			line=reader.readLine();
+		}
+		
+		String json = new String(sb);
+		System.out.println(json);
+		Address address = objectMapper.readValue(json,  Address.class);
+		
+		//CALL ORM HERE
+		addressService.DeleteAddress(address);;
+		
+		response.setStatus(405);
 		
 		
 	}

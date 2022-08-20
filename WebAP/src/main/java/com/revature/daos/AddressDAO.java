@@ -12,4 +12,5 @@ public interface AddressDAO {
 	List<Address> getAllAddress();
 	public abstract void insertAddress(Address address);	
 	public abstract void deleteAddress(Address address);
+	public abstract void updateAddress(Address address);
 }

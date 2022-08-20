@@ -70,8 +70,8 @@ public class AddressDaoImpl implements AddressDAO {
 
 	public void insertAddress(Address address) {
 		try(Connection conn = ConnectionUtil.getConnection()){		
-			String sql = "INSERT INTO address (street, apartment, city, zip)" 
-						+ " VALUES (?,?,?,?,?,?);";		
+			String sql = "INSERT INTO address_book (street, apartment_number, city, zip)" 
+						+ " VALUES (?,?,?,?);";		
 		
 			PreparedStatement statement = conn.prepareStatement(sql);
 			
@@ -118,10 +118,10 @@ public class AddressDaoImpl implements AddressDAO {
 		return null;	
 	}
 
-	
+	@Override
 	public void deleteAddress(Address address) {
 		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "DELETE FROM address WHERE address_id = " + address.getAddressId() + ";";
+			String sql = "DELETE FROM address_book WHERE address_id = " + address.getAddressId() + ";";
 			PreparedStatement statement = conn.prepareStatement(sql);				
 			statement.execute();
 			
@@ -131,5 +131,20 @@ public class AddressDaoImpl implements AddressDAO {
 		
 	}
 	
+	public void updateAddress(Address address) {
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "UPDATE address_book SET city = " + "'" + address.getCity() + "'" + 
+					", street = "+ "'" + address.getStreet()+ "'" + 
+					", zip = " + "'"+ address.getZip() + "'" +
+					", apartment_number = " + "'" + address.getApartment() + "'" +
+					" WHERE address_id = "+ "'" + address.getAddressId()+ "'" + ";";
+			PreparedStatement statement = conn.prepareStatement(sql);			
+			statement.execute();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 		
 }

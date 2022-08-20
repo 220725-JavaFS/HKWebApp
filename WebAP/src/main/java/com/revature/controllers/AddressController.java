@@ -25,7 +25,7 @@ public class AddressController extends HttpServlet{
 		throws ServletException, IOException{
 		
 		List<Address> list = addressService.AddressAssemble();
-		
+		//CALL ORM HERE ^^^^^
 		String json = objectMapper.writeValueAsString(list);
 		System.out.println(json);
 		
@@ -51,12 +51,12 @@ public class AddressController extends HttpServlet{
 		
 		String json = new String(sb);
 		System.out.println(json);
-		Address address = objectMapper.readValue(json,  Address.class);
+		Address address = objectMapper.readValue(json, Address.class);
 		
 		//CALL ORM HERE
 		addressService.recruitAddress(address);;
 		
-		response.setStatus(201);
+		response.setStatus(200);
 		
 		
 	}
@@ -71,15 +71,34 @@ public class AddressController extends HttpServlet{
 		}
 		
 		String json = new String(sb);
-		System.out.println(json);
+		System.out.println("You have deleted " + json);
 		Address address = objectMapper.readValue(json,  Address.class);
 		
 		//CALL ORM HERE
 		addressService.DeleteAddress(address);;
 		
-		response.setStatus(405);
+		response.setStatus(200);
 		
 		
+	}
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		StringBuilder sb = new StringBuilder();
+		BufferedReader reader = request.getReader();
+		String line = reader.readLine();
+		
+		while(line!=null) {
+			sb.append(line);
+			line=reader.readLine();
+		}
+		
+		String json = new String(sb);
+		System.out.println("Updated " + json);
+		Address address = objectMapper.readValue(json,  Address.class);
+		
+		//CALL ORM HERE
+		addressService.updateAddress(address);;
+		
+		response.setStatus(200);
 	}
 	
 	

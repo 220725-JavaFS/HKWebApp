@@ -41,5 +41,8 @@ private AddressDAO addressDao = new AddressDaoImpl();
 	public void DeleteAddress(Address address) {		
 		addressDao.deleteAddress(address);
 	}
+	public void updateAddress(Address address) {
+		addressDao.updateAddress(address);
+	}
 	
 }

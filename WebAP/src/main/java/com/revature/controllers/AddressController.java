@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.json.JsonMapper;
 import com.revature.models.Address;
 import com.revature.services.AddressService;
 
@@ -19,19 +20,19 @@ public class AddressController extends HttpServlet{
 
 	private AddressService addressService = new AddressService();
 	private ObjectMapper objectMapper = new ObjectMapper();
+	private JsonMapper mapper = new JsonMapper();
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException{
 		
-		List<Address> list = addressService.AddressAssemble();
-		//CALL ORM HERE ^^^^^
-		String json = objectMapper.writeValueAsString(list);
-		System.out.println(json);
-		
+		List<Address> list = addressService.AddressAssemble();			
 		PrintWriter printWriter = response.getWriter();
-		
-		printWriter.print(json);
+		for(Object o:list) {
+			String mapped = mapper.serialize(o);
+			printWriter.print(mapped);
+		}
+		//CALL ORM HERE ^^^^^	
 		
 		response.setStatus(200);		
 		response.setContentType("application/json");
@@ -52,10 +53,11 @@ public class AddressController extends HttpServlet{
 		String json = new String(sb);
 		System.out.println(json);
 		Address address = objectMapper.readValue(json, Address.class);
-		
+		PrintWriter printWriter = response.getWriter();
 		//CALL ORM HERE
 		addressService.recruitAddress(address);;
-		
+		String mapped = mapper.serialize(address);
+		printWriter.print("You have created " + mapped);
 		response.setStatus(200);
 		
 		
@@ -71,12 +73,13 @@ public class AddressController extends HttpServlet{
 		}
 		
 		String json = new String(sb);
-		System.out.println("You have deleted " + json);
-		Address address = objectMapper.readValue(json,  Address.class);
 		
+		Address address = objectMapper.readValue(json,  Address.class);
+		PrintWriter printWriter = response.getWriter();
 		//CALL ORM HERE
 		addressService.DeleteAddress(address);;
-		
+		String mapped = mapper.serialize(address);
+		printWriter.print("You have deleted " + mapped);
 		response.setStatus(200);
 		
 		
@@ -94,10 +97,11 @@ public class AddressController extends HttpServlet{
 		String json = new String(sb);
 		System.out.println("Updated " + json);
 		Address address = objectMapper.readValue(json,  Address.class);
-		
+		PrintWriter printWriter = response.getWriter();
 		//CALL ORM HERE
 		addressService.updateAddress(address);;
-		
+		String mapped = mapper.serialize(address);
+		printWriter.print("You have updated " + mapped);
 		response.setStatus(200);
 	}
 	

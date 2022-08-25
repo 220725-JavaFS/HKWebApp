@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.json.JsonMapper;
@@ -22,7 +26,7 @@ public class AddressController extends HttpServlet{
 	private AddressService addressService = new AddressService();
 	private ObjectMapper objectMapper = new ObjectMapper();
 	private JsonMapper mapper = new JsonMapper();
-	
+	private static Logger log = LoggerFactory.getLogger(Address.class);
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 		throws ServletException, IOException{
@@ -32,6 +36,7 @@ public class AddressController extends HttpServlet{
 		for(Object o:list) {
 			String mapped = mapper.serialize(o);
 			printWriter.print(mapped);
+			log.info(mapped);
 		}
 		//CALL ORM HERE ^^^^^	
 		
@@ -58,6 +63,17 @@ public class AddressController extends HttpServlet{
 		//CALL ORM HERE
 		addressService.recruitAddress(address);;
 		String mapped = mapper.serialize(address);
+		
+		// Using Stream builder()
+        Stream.Builder<String> builder = Stream.builder();
+  
+        // Adding elements in the stream of Strings
+        Stream<String> stream = builder.add(mapped).build();
+  
+        // Displaying the elements in the stream
+        System.out.println("This is what you added.");
+        stream.forEach(System.out::println);
+		
 		printWriter.print("You have created " + mapped);
 		response.setStatus(200);
 		
@@ -102,6 +118,7 @@ public class AddressController extends HttpServlet{
 		//CALL ORM HERE
 		addressService.updateAddress(address);;
 		String mapped = mapper.serialize(address);
+		log.info(mapped);
 		printWriter.print("You have updated " + mapped);
 		response.setStatus(200);
 	}

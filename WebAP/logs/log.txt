@@ -1,0 +1,16 @@
+17:08:02.045 [] [main] DEBUG com.revature.Driver - I am a debug log.
+17:08:02.048 [] [main] INFO  com.revature.Driver - I am an info log.
+17:08:02.049 [] [main] WARN  com.revature.Driver - I am a warn log.
+17:08:02.049 [] [main] ERROR com.revature.Driver - I am an error log.
+17:09:11.725 [] [main] DEBUG com.revature.Driver - I am a debug log.
+17:09:11.728 [] [main] INFO  com.revature.Driver - I am an info log.
+17:09:11.729 [] [main] WARN  com.revature.Driver - I am a warn log.
+17:09:11.730 [] [main] ERROR com.revature.Driver - I am an error log.
+17:09:50.413 [] [main] DEBUG com.revature.Driver - I am a debug log.
+17:09:50.418 [] [main] INFO  com.revature.Driver - I am an info log.
+17:09:50.419 [] [main] WARN  com.revature.Driver - I am a warn log.
+17:09:50.429 [] [main] ERROR com.revature.Driver - I am an error log.
+17:10:40.494 [] [main] DEBUG com.revature.Driver - I am a debug log.
+17:10:40.499 [] [main] INFO  com.revature.Driver - I am an info log.
+17:10:40.500 [] [main] WARN  com.revature.Driver - I am a warn log.
+17:10:40.500 [] [main] ERROR com.revature.Driver - I am an error log.

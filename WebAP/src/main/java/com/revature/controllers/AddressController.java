@@ -96,6 +96,7 @@ public class AddressController extends HttpServlet{
 		//CALL ORM HERE
 		addressService.DeleteAddress(address);;
 		String mapped = mapper.serialize(address);
+		log.info("This is what you updated" +mapped);
 		printWriter.print("You have deleted " + mapped);
 		response.setStatus(200);
 		
@@ -118,7 +119,8 @@ public class AddressController extends HttpServlet{
 		//CALL ORM HERE
 		addressService.updateAddress(address);;
 		String mapped = mapper.serialize(address);
-		log.info(mapped);
+		
+		log.info("This is what you updated" +mapped);
 		printWriter.print("You have updated " + mapped);
 		response.setStatus(200);
 	}

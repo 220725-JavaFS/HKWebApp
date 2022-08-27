@@ -13,4 +13,5 @@ public interface AddressDAO {
 	public abstract void insertAddress(Address address);	
 	public abstract void deleteAddress(Address address);
 	public abstract void updateAddress(Address address);
+	public abstract void doGet2(Object o);
 }

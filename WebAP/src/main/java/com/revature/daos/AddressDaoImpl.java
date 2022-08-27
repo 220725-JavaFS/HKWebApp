@@ -1,5 +1,8 @@
 package com.revature.daos;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +11,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.json.JsonMapper;
 import com.revature.models.Address;
 import com.revature.utils.ConnectionUtil;
+
+
 
 
 
@@ -144,6 +150,34 @@ public class AddressDaoImpl implements AddressDAO {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+	@Override
+	public void doGet2(Object o) {
+		
+		Class<?> c1 = o.getClass();					
+		Address a = new Address();
+		Field[] fields = c1.getDeclaredFields();
+		Constructor<?>[] FMethods = c1.getConstructors();
+		
+		JsonMapper mapper = new JsonMapper();
+		String objectName = mapper.returnObjectClassName(o);
+		//Finish SQL statement
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT * FROM "+ objectName.toLowerCase()  +"WHERE "+fields[0] + " = "  ;
+					
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		System.out.println("-------");
+		
+		
 		
 	}
 		

@@ -27,5 +27,10 @@ private AddressDAO addressDao = new AddressDaoImpl();
 	public void updateAddress(Address address) {
 		addressDao.updateAddress(address);
 	}
+
+	public void doGet2(String mapped, Object o) {
+		addressDao.doGet2(o);
+		
+	}
 	
 }

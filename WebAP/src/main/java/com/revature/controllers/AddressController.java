@@ -125,5 +125,20 @@ public class AddressController extends HttpServlet{
 		response.setStatus(200);
 	}
 	
+	protected void doGet2(HttpServletRequest request, HttpServletResponse response ) throws ServletException,IOException {
+		StringBuilder sb = new StringBuilder();
+		BufferedReader reader = request.getReader();
+		String line = reader.readLine();
+		
+		while(line!=null) {
+			sb.append(line);
+			line=reader.readLine();
+		}
+		
+		String json = new String(sb);
+		Address address = objectMapper.readValue(json,  Address.class);
+		String mapped = mapper.serialize(address);
+		addressService.doGet2(mapped, address);
+	}
 	
 }

@@ -11,7 +11,7 @@
   </welcome-file-list>
   
   <servlet>
-	  <description>Says hello</description> <!-- optional tag -->
+	  
 	  <display-name>ProjectOneWebApp</display-name> <!-- optional tag -->
 	  <servlet-name>ProjectOneWebApp</servlet-name>
 	  <servlet-class>com.revature.controllers.AddressController</servlet-class>
